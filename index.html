@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Autómatas Finitos Determinísticos</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🤖 Simulador de Autómatas Finitos Determinísticos</h1>
+            <p>Carga archivos de autómatas y prueba el reconocimiento de palabras</p>
+        </header>
+
+        <main class="main-content">
+            <!-- Sección de carga de archivos -->
+            <section class="file-section">
+                <div class="file-upload-area" id="fileUploadArea">
+                    <div class="upload-content">
+                        <div class="upload-icon">📁</div>
+                        <h3>Arrastra tu archivo aquí</h3>
+                        <p>o haz clic para seleccionar</p>
+                        <input type="file" id="fileInput" accept=".txt" hidden>
+                    </div>
+                </div>
+                <div class="file-info" id="fileInfo" style="display: none;">
+                    <h4>Archivo cargado:</h4>
+                    <p id="fileName"></p>
+                    <button id="clearFile" class="btn btn-secondary">Limpiar</button>
+                </div>
+            </section>
+
+            <!-- Sección de autómatas cargados -->
+            <section class="automata-section">
+                <div class="section-tabs">
+                    <button class="tab-button active" data-tab="automata">Autómatas</button>
+                </div>
+                
+                <div class="tab-content active" id="automata-tab">
+                    <div class="automata-list" id="automataList">
+                        <p class="no-automata">No hay autómatas cargados</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección de prueba de palabras -->
+            <section class="test-section">
+                <h2>Probar Reconocimiento de Palabras</h2>
+                <div class="test-controls">
+                    <select id="automataSelect" disabled>
+                        <option value="">Selecciona un autómata</option>
+                    </select>
+                    <div class="input-group">
+                        <input type="text" id="wordInput" placeholder="Ingresa una palabra para probar" disabled>
+                        <button id="testButton" class="btn btn-primary" disabled>Probar</button>
+                    </div>
+                </div>
+                <div class="test-result" id="testResult"></div>
+            </section>
+
+            <!-- Sección de visualización -->
+            <section class="visualization-section">
+                <h2>Visualización del Autómata</h2>
+                <div class="visualization-container">
+                    <svg id="automataSvg"></svg>
+                    <div class="visualization-controls">
+                        <button id="resetZoom" class="btn btn-secondary">Resetear Zoom</button>
+                        <button id="centerGraph" class="btn btn-secondary">Centrar</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Panel de información -->
+        <aside class="info-panel">
+            <h3>ℹ️ Información</h3>
+            <div class="info-content">
+                <h4>Formato AFD:</h4>
+                <ul>
+                    <li><strong>1:</strong> Estados</li>
+                    <li><strong>2:</strong> Alfabeto</li>
+                    <li><strong>3:</strong> Estado inicial</li>
+                    <li><strong>4:</strong> Estados finales</li>
+                    <li><strong>5:</strong> Transiciones</li>
+                </ul>
+                
+                <h4>Ejemplos AFD:</h4>
+                <pre>1:AF04:q0,q1,q2
+2:AF04:a,b
+3:AF04:q0
+4:AF04:q1
+5:AF04:q0,a,q1;q0,b,q2;q1,a,q1;q1,b,q2;q2,a,q1;q2,b,q0
+
+1:AFD_Binario:s0,s1,s2
+2:AFD_Binario:0,1
+3:AFD_Binario:s0
+4:AFD_Binario:s0
+5:AFD_Binario:s0,0,s0;s0,1,s1;s1,0,s2;s1,1,s0;s2,0,s1;s2,1,s2
+
+1:AFD_Simple:p,q
+2:AFD_Simple:a,b
+3:AFD_Simple:p
+4:AFD_Simple:q
+5:AFD_Simple:p,a,q;p,b,p;q,a,p;q,b,q</pre>
+            </div>
+        </aside>
+    </div>
+
+    <script src="automata.js"></script>
+    <script src="visualization.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
